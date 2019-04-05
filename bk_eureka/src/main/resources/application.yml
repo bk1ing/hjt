@@ -4,16 +4,26 @@ spring:
   profiles: default
 server:
   port: 8000
-enableSelfPreservation: false
-leaseRenewalIntervalInSeconds: 2
+# eureka.instance.leaseRenewalIntervalInSeconds  leaseRenewalIntervalInSeconds: 2
+# eureka.server.enableSelfPreservation=false
 eureka:
-  instance: 
-    hostname: peer1
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 3
+#    hostname: localhost
+#    hostname: ${HOST_NAME}
+#    statusPageUrlPath: ${server.servletPath}/info
+#    healthCheckUrlPath: ${server.servletPath}/health
+  server:
+    enableSelfPreservation: false
   client: 
     register-with-eureka: false
     fetch-registry: false
+    healthcheck:
+      enabled: true
     serviceUrl: 
-      defaultZone:  http://localhost:${server.port}/eureka/
+#      defaultZone:  http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone:  http://127.0.0.1:${server.port}/eureka/
 ---
 spring: 
   application:
@@ -21,16 +31,18 @@ spring:
   profiles: bkEureka56
 server:
   port: 8000
-enableSelfPreservation: false
-leaseRenewalIntervalInSeconds: 2
 eureka:
   instance: 
-    hostname: bkEureka56
+    #hostname: bkEureka56
+    preferIpAddress: true
   client: 
     register-with-eureka: true
     fetch-registry: true
+    healthcheck:
+      enabled: true
     serviceUrl: 
-      defaultZone:  http://bkEureka57:8000/eureka/,http://bkEureka58:8000/eureka/
+      #defaultZone:  http://bkEureka57:8000/eureka/,http://bkEureka58:8000/eureka/
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
 ---
 spring: 
   application:
@@ -38,16 +50,18 @@ spring:
   profiles: bkEureka57
 server:
   port: 8000
-enableSelfPreservation: false
-leaseRenewalIntervalInSeconds: 2
 eureka:
   instance: 
-    hostname: bkEureka57
+    #hostname: bkEureka57
+    preferIpAddress: true
   client: 
     register-with-eureka: true
     fetch-registry: true
+    healthcheck:
+      enabled: true
     serviceUrl: 
-      defaultZone:  http://bkEureka56:8000/eureka/,http://bkEureka58:8000/eureka/
+      #defaultZone:  http://bkEureka56:8000/eureka/,http://bkEureka58:8000/eureka/
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
 ---
 spring: 
   application:
@@ -55,13 +69,15 @@ spring:
   profiles: bkEureka58
 server:
   port: 8000
-enableSelfPreservation: false
-leaseRenewalIntervalInSeconds: 2
 eureka:
   instance: 
-    hostname: bkEureka58
+    #hostname: bkEureka58
+    preferIpAddress: true
   client: 
     register-with-eureka: true
     fetch-registry: true
+    healthcheck:
+      enabled: true
     serviceUrl: 
-      defaultZone:  http://bkEureka56:8000/eureka/,http://bkEureka57:8000/eureka/
+      #defaultZone:  http://bkEureka56:8000/eureka/,http://bkEureka57:8000/eureka/
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/

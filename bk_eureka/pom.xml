@@ -10,23 +10,53 @@
 	<artifactId>bk_eureka</artifactId>
 	<name>bk_eureka</name>
 	<description>bk_eureka</description>
+	
+	<!--
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<start-class>com.bk.eureka.BkEurekaApplication</start-class>
+		<java.version>1.8</java.version>
+		  <docker.image.prefix>springcloud</docker.image.prefix> 
+	</properties>
+	-->
 
 	<dependencies>
+	<!--  
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-commons</artifactId>
+		</dependency>	
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<!--<artifactId>spring-cloud-starter-eureka-server</artifactId> -->
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>		-->	
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-			<!-- <version>2.1.1.RELEASE</version> -->
 		</dependency>
 	</dependencies>
 	
+	<!--  -->
 	<build>
 		<finalName>bk_eureka</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<requiresUnpack>
+						<dependency>
+							<groupId>com.netflix.eureka</groupId>
+							<artifactId>eureka-core</artifactId>
+						</dependency>
+						<dependency>
+							<groupId>com.netflix.eureka</groupId>
+							<artifactId>eureka-client</artifactId>
+						</dependency>
+					</requiresUnpack>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	
 </project>
