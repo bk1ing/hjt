@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: bkEureka
+  profiles: default
+server:
+  port: 8000
+enableSelfPreservation: false
+leaseRenewalIntervalInSeconds: 2
+eureka:
+  instance: 
+    hostname: peer1
+  client: 
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl: 
+      defaultZone:  http://localhost:${server.port}/eureka/
+---
+spring: 
+  application:
+    name: bkEureka
+  profiles: bkEureka56
+server:
+  port: 8000
+enableSelfPreservation: false
+leaseRenewalIntervalInSeconds: 2
+eureka:
+  instance: 
+    hostname: bkEureka56
+  client: 
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl: 
+      defaultZone:  http://bkEureka57:8000/eureka/,http://bkEureka58:8000/eureka/
+---
+spring: 
+  application:
+    name: bkEureka
+  profiles: bkEureka57
+server:
+  port: 8000
+enableSelfPreservation: false
+leaseRenewalIntervalInSeconds: 2
+eureka:
+  instance: 
+    hostname: bkEureka57
+  client: 
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl: 
+      defaultZone:  http://bkEureka56:8000/eureka/,http://bkEureka58:8000/eureka/
+---
+spring: 
+  application:
+    name: bkEureka
+  profiles: bkEureka58
+server:
+  port: 8000
+enableSelfPreservation: false
+leaseRenewalIntervalInSeconds: 2
+eureka:
+  instance: 
+    hostname: bkEureka58
+  client: 
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl: 
+      defaultZone:  http://bkEureka56:8000/eureka/,http://bkEureka57:8000/eureka/

@@ -1,0 +1,9 @@
+#众所周知，spring cloud eureka是使用hostname进行注册的，如果想使用IP进行注册那应该如何处理呢。只需要在eureka服务端增加如下配置
+#eureka.instance.perferIpAddress=true
+
+# http://172.16.16.56:8000/   http://172.16.16.57:8000/  http://172.16.16.58:8000/
+# nohup  java -jar bk_eureka.jar --spring.profiles.active=bkEureka56  > bkEureka.log &
+#  nohup  java -jar bk_eureka.jar --spring.profiles.active=bkEureka57   > bkEureka.log &
+#  nohup  java -jar bk_eureka.jar --spring.profiles.active=bkEureka58   > bkEureka.log &
+
+https://mvnrepository.com/search?q=spring-cloud+eureka
