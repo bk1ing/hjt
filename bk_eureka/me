@@ -7,3 +7,6 @@
 #  nohup  java -jar bk_eureka.jar --spring.profiles.active=bkEureka58   > bkEureka.log &
 
 https://mvnrepository.com/search?q=spring-cloud+eureka
+
+http://172.16.16.58:8000/
+http://172.16.16.57:8000/

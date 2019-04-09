@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.2.RELEASE</version>
+		<version>2.0.3.RELEASE</version>
 	</parent>
 
 	<groupId>com.bk</groupId>
@@ -20,8 +20,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<!--  <spring-cloud.version>Finchley.RELEASE</spring-cloud.version> -->
-		<spring-cloud.version>Finchley.SR2</spring-cloud.version>
+		<spring-cloud.version>Finchley.SR2</spring-cloud.version> 
+		<!--Finchley.RELEASE
+		Finchley.SR3-->
 		<docker.image.prefix>springcloud</docker.image.prefix>
 	</properties>
 
@@ -53,5 +54,10 @@
 	<modules>
 		<module>bk_eureka</module><!-- 8000 -->
 		<module>test_producer</module><!-- 8001 -->
+		<module>test_consumer</module><!-- 8002 -->
+		<module>bk_hystrixDashboard</module><!-- 8003 -->
+		<module>bk_turbine</module><!--	8004 -->
+		<module>bk_configServer</module>
+		<module>bk_zipkin</module><!-- 	5 -->
 	</modules>
 </project>
