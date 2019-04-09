@@ -1,0 +1,44 @@
+spring:
+  profiles: default
+  application:
+    name: bkTurbine
+#  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+#        serviceId: configserver
+server:
+  port: 8004
+#  context-path: /testConsumer
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 3
+  client:
+    registryFetchIntervalSeconds: 5
+    healthcheck:
+      enabled: true
+    serviceUrl: 
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
+#      defaultZone: http://127.0.0.1:8000/eureka/
+turbine:
+#  appConfig: bkEureka,testProducer,testConsumer
+  appConfig: testConsumer
+  cluster-name-expression: new String("default")
+  combine-host-port: true
+#  instanceUrlSuffix: /actuator/hystrix.stream
+  instanceUrlSuffix: /actuator/hystrix.stream
+---
+spring: 
+  application:
+    name: bkTurbine
+  profiles: dev
+server:
+  port: 8000
+---
+spring: 
+  application:
+    name: bkTurbine
+  profiles: prod
+server:
+  port: 8000

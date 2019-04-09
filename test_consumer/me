@@ -1,0 +1,11 @@
+http://localhost:8002/hello/consumerCallBv1
+
+--------------------------------------------------
+http://localhost:8002/actuator/hystrix.stream
+
+
+--------------------------------------------------
+Turbine client, unable finish.
+
+http://localhost:8002/turbine.stream
+http://localhost:8031/turbine.stream

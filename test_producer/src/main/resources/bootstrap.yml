@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: testProducer
+  profiles: default
+  cloud:
+    config:
+#      uri: ${CONFIG_SERVER_URL:http://localhost:8888}
+#      uri: ${CONFIG_SERVER_URL:http://localhost:8005}
+      discovery:
+        enabled: true
+        service-id: bkConfigServer
+#------------------err------------------------------
+#      uri: http://localhost:8005
+#      name: testProducer
+#      profile: defalut
+#      label: master
+#----------------err---------------------------------
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl: 
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
+---
+---
+---

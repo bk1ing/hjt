@@ -1,0 +1,55 @@
+spring:
+  profiles: default
+  application:
+    name: bkConfigServer
+  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+#        serviceId: configserver
+    config:
+      server:
+        git:
+          uri: http://172.16.16.90:8000/r/~test1/springCloundCfg/funo/cfg.git
+          search-paths: /config-repo,/test_producer
+          username: test1
+          password: test1
+#spring.cloud.config.server.git.username：访问 Git 仓库的用户名
+#spring.cloud.config.server.git.password：访问 Git 仓库的用户密码
+server:
+  port: 8005
+#  context-path: /testProducer
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+eureka:
+  instance:
+    preferIpAddress: true
+#    leaseRenewalIntervalInSeconds: 3
+  client:
+#    registryFetchIntervalSeconds: 5
+#    healthcheck:
+#      enabled: true
+    serviceUrl: 
+#      defaultZone: http://bkEureka56:8000/eureka/,http://bkEureka57:8000/eureka/,http://bkEureka58:8000/eureka/
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
+#      defaultZone: http://127.0.0.1:8000/eureka/
+---
+spring: 
+  application:
+    name: bkConfigServer
+  profiles: dev
+server:
+  port: 8005
+---
+spring: 
+  application:
+    name: bkConfigServer
+  profiles: prod
+server:
+  port: 8005

@@ -1,0 +1,38 @@
+spring:
+  profiles: default
+  application:
+    name: bkZipkin
+#  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+#        serviceId: configserver
+server:
+  port: 8005
+#  context-path: /testProducer
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 3
+  client:
+    registryFetchIntervalSeconds: 5
+    healthcheck:
+      enabled: true
+    serviceUrl: 
+#      defaultZone: http://bkEureka56:8000/eureka/,http://bkEureka57:8000/eureka/,http://bkEureka58:8000/eureka/
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
+#      defaultZone: http://127.0.0.1:8000/eureka/
+---
+spring: 
+  application:
+    name: bkZipkin
+  profiles: dev
+server:
+  port: 8001
+---
+spring: 
+  application:
+    name: bkZipkin
+  profiles: prod
+server:
+  port: 8001

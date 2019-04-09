@@ -1,0 +1,2 @@
+http://localhost:8003/hystrix
+中 输入  http://localhost:8002/actuator/hystrix.stream
