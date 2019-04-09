@@ -57,7 +57,7 @@
 		<module>test_consumer</module><!-- 8002 -->
 		<module>bk_hystrixDashboard</module><!-- 8003 -->
 		<module>bk_turbine</module><!--	8004 -->
-		<module>bk_configServer</module>
+		<module>bk_configServer</module><!-- 8005 -->
 		<module>bk_zipkin</module><!-- 	5 -->
 	</modules>
 </project>
