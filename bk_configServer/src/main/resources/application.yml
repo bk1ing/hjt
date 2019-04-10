@@ -1,3 +1,22 @@
+#info.app.name=amber-cloud-dept-8001
+#info.company.name=www.amber.com
+#info.build.artifactId=$project.artifactId$
+#info.build.version=$project.version$
+info:
+  app:
+    name: "@project.artifactId@"
+    encoding: '@project.build.sourceEncoding@'
+    java:
+      source: '@java.version@'
+      target: '@java.version@'
+#  company:
+#    name: bkLto
+  build:
+    name: "@project.artifactId@"
+    groupId: "@project.groupId@"
+    artifactId: "@project.artifactId@"
+    version: "@project.version@"
+    
 spring:
   profiles: default
   application:
@@ -16,17 +35,47 @@ spring:
           password: test1
 #spring.cloud.config.server.git.username：访问 Git 仓库的用户名
 #spring.cloud.config.server.git.password：访问 Git 仓库的用户密码
+    bus:
+      enabled: true
+      trace:
+        enabled: true
+    stream:
+#      bindings:
+        #配置自己定义的通道与哪个中间件交互
+#        shop_input: #ShopChannel里Input和Output的值
+#          destination: springConfigServerShopInput #目标主题
+#        shop_output:
+#          destination: springConfigServerShopOutput
+#      default-binder: kafka #默认的binder是kafka
+      kafka:
+        binder:
+          # Kafka的服务端列表，默认localhost
+          brokers: 172.16.16.90:9092
+          # Kafka服务端连接的ZooKeeper节点列表，默认localhost
+          zkNodes: 172.16.16.90:2181
+          minPartitionCount: 1
+          autoCreateTopics: true
+          autoAddPartitions: true
 server:
   port: 8005
 #  context-path: /testProducer
 feign:
   hystrix:
     enabled: true
-management:
+management: #监控短点配置
+  security:
+    enabled: false
+  #是否需要权限拉去，默认是true,如果不false就不允许你去拉取配置中心Server更新的内容
   endpoints:
+    actuator:
+      enabled: true
+    shutdown:
+      enabled: true
     web:
       exposure:
-        include: hystrix.stream
+#        include: bus-refresh,hystrix.stream
+        include: "*" #暴露所有端点 默认是info,health
+#management.endpoints.web.exposure.include=*
 eureka:
   instance:
     preferIpAddress: true
@@ -39,6 +88,12 @@ eureka:
 #      defaultZone: http://bkEureka56:8000/eureka/,http://bkEureka57:8000/eureka/,http://bkEureka58:8000/eureka/
       defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
 #      defaultZone: http://127.0.0.1:8000/eureka/
+swagger2: 
+  title: 配置中心文档
+  version: 1.0
+  description: 配置中心文档描述
+  basePackage: 
+    - com.bk
 ---
 spring: 
   application:

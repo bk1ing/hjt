@@ -3,9 +3,24 @@ http://localhost:8005/config/pro
 
 http://localhost:8005/config-dev.yml
 
-http://localhost:8005/test_producer-dev.yml
-http://localhost:8005/test_producer-defalut.yml
-http://localhost:8005/test_producer-prod.yml
+http://localhost:8005/testProducer-dev.yml
+http://localhost:8005/testProducer-default.yml
+http://localhost:8005/testProducer-prod.yml
+
+http://localhost:8005/actuator/hystrix.stream
+
+http://localhost:8005/home
+
+http://localhost:8005/actuator/bus-refresh
+
+
+http://localhost:8005/testHello/hello?name=abcName
+
+
+http://localhost:8005/swagger-ui.html
+
+
+curl -X POST http://localhost:8002/bus/refresh
 
 仓库中的配置文件会被转换成 Web 接口，访问可以参照以下的规则：
 /{application}/{profile}[/{label}]
@@ -14,3 +29,40 @@ http://localhost:8005/test_producer-prod.yml
 /{application}-{profile}.properties
 /{label}/{application}-{profile}.properties
 上面的 URL 会映射{application}-{profile}.yml对应的配置文件，其中{label}对应 Git 上不同的分支，默认为 master。
+
+
+--------------------------------------------------
+
+auditevents	公开当前应用程序的审计事件信息。
+beans	显示应用程序中所有Spring bean的完整列表。
+configprops	显示应用中配置的属性信息报告。
+env	显示应用中所有可用的环境属性报告，包括环境变量、JVM属性、应用的配置属性、命令行的参数。
+health	显示应用健康信息。
+httptrace	显示HTTP跟踪信息（默认情况下为最后100个HTTP请求 - 响应交换）。
+info	显示应用的自定义信息，默认是空。
+metrics	显示当前应用程序的“指标”信息，如内存信息、线程信息。
+mappings	显示所有url映射。
+scheduledtasks	显示应用程序中的计划任务。
+shutdown	让应用程序正常关机。
+threaddump	程序运行中的线程信息。
+
+http://localhost:8005/actuator
+
+http://localhost:8005/autuator/auditevents
+http://localhost:8005/autuator/beans
+http://localhost:8005/autuator/configprops
+http://localhost:8005/autuator/env
+http://localhost:8005/autuator/health
+http://localhost:8005/autuator/httptrace
+http://localhost:8005/autuator/info
+http://localhost:8005/autuator/metrics
+http://localhost:8005/autuator/mappings
+http://localhost:8005/autuator/scheduledtasks
+http://localhost:8005/autuator/shutdown
+http://localhost:8005/autuator/threaddump
+
+http://localhost:8005/actuator/health
+http://localhost:8005/actuator/info
+http://localhost:8005/actuator/shutdown
+http://localhost:8005/actuator/threaddump
+

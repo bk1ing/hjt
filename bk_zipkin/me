@@ -1,0 +1,7 @@
+		<module>bk_zipkin</module><!-- 8007 -->
+----------------------
+nohup  java -jar zipkin.jar > zipkin.log &
+
+http://localhost:9411/zipkin/
+
+http://172.16.16.56:9411/zipkin/

@@ -2,6 +2,14 @@ spring:
   application:
     name: bkEureka
   profiles: default
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
+  zipkin:
+    base-url: http://172.16.16.56:9411/ # 指定了 Zipkin 服务器的地址
 server:
   port: 8000
 # eureka.instance.leaseRenewalIntervalInSeconds  leaseRenewalIntervalInSeconds: 2
@@ -29,6 +37,14 @@ spring:
   application:
     name: bkEureka
   profiles: bkEureka56
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
+  zipkin:
+    base-url: http://172.16.16.56:9411/ # 指定了 Zipkin 服务器的地址
 server:
   port: 8000
 eureka:
@@ -36,10 +52,10 @@ eureka:
     #hostname: bkEureka56
     preferIpAddress: true
   client: 
-    register-with-eureka: true
-    fetch-registry: true
-    healthcheck:
-      enabled: true
+#    register-with-eureka: true
+#    fetch-registry: true
+#    healthcheck:
+#      enabled: true
     serviceUrl: 
       #defaultZone:  http://bkEureka57:8000/eureka/,http://bkEureka58:8000/eureka/
       defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
@@ -48,6 +64,14 @@ spring:
   application:
     name: bkEureka
   profiles: bkEureka57
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
+  zipkin:
+    base-url: http://172.16.16.56:9411/ # 指定了 Zipkin 服务器的地址
 server:
   port: 8000
 eureka:
@@ -55,10 +79,6 @@ eureka:
     #hostname: bkEureka57
     preferIpAddress: true
   client: 
-    register-with-eureka: true
-    fetch-registry: true
-    healthcheck:
-      enabled: true
     serviceUrl: 
       #defaultZone:  http://bkEureka56:8000/eureka/,http://bkEureka58:8000/eureka/
       defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
@@ -67,6 +87,14 @@ spring:
   application:
     name: bkEureka
   profiles: bkEureka58
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
+  zipkin:
+    base-url: http://172.16.16.56:9411/ # 指定了 Zipkin 服务器的地址
 server:
   port: 8000
 eureka:
@@ -74,10 +102,6 @@ eureka:
     #hostname: bkEureka58
     preferIpAddress: true
   client: 
-    register-with-eureka: true
-    fetch-registry: true
-    healthcheck:
-      enabled: true
     serviceUrl: 
       #defaultZone:  http://bkEureka56:8000/eureka/,http://bkEureka57:8000/eureka/
       defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
