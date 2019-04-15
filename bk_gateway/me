@@ -13,6 +13,7 @@ http://localhost:8006/home
 route->service testproducer
 http://localhost:8006/testproducer/home
 http://localhost:8006/testproducer/hello?name=abcName
+http://localhost:8006/testproducer/swagger-ui.html
 
 route->service testconsumer
 http://localhost:8006/testconsumer/home

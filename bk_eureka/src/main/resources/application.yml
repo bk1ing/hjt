@@ -16,17 +16,18 @@ server:
 # eureka.server.enableSelfPreservation=false
 eureka:
   instance:
-    preferIpAddress: true
-    leaseRenewalIntervalInSeconds: 3
+    prefer-ip-address: true
+#    leaseRenewalIntervalInSeconds: 3
 #    hostname: localhost
 #    hostname: ${HOST_NAME}
 #    statusPageUrlPath: ${server.servletPath}/info
 #    healthCheckUrlPath: ${server.servletPath}/health
   server:
-    enableSelfPreservation: false
+    enable-self-preservation: false # 关闭保护机制，默认true
+    eviction-interval-timer-in-ms: 3000 # 剔除失效服务间隔，默认60000
   client: 
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: false # 实例是否在eureka服务器上注册自己的信息以供其他服务发现，默认为true
+    fetch-registry: false   # 此客户端是否获取eureka服务器注册表上的注册信息，默认为true
     healthcheck:
       enabled: true
     serviceUrl: 
@@ -46,7 +47,7 @@ spring:
   zipkin:
     base-url: http://172.16.16.56:9411/ # 指定了 Zipkin 服务器的地址
 server:
-  port: 8000
+  port: 9000
 eureka:
   instance: 
     #hostname: bkEureka56
@@ -73,7 +74,7 @@ spring:
   zipkin:
     base-url: http://172.16.16.56:9411/ # 指定了 Zipkin 服务器的地址
 server:
-  port: 8000
+  port: 9000
 eureka:
   instance: 
     #hostname: bkEureka57
@@ -96,7 +97,7 @@ spring:
   zipkin:
     base-url: http://172.16.16.56:9411/ # 指定了 Zipkin 服务器的地址
 server:
-  port: 8000
+  port: 9000
 eureka:
   instance: 
     #hostname: bkEureka58

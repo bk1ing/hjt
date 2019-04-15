@@ -1,5 +1,7 @@
 http://localhost:8001/actuator/hystrix.stream
 
+http://localhost:8001/actuator/health
+
 http://localhost:8001/bus-refresh
 
 http://localhost:8001/hello?name=abcName

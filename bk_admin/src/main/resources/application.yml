@@ -1,0 +1,59 @@
+spring:
+  profiles: default
+  application:
+    name: bkAdmin
+#spring.security.user.name=user
+#spring.security.user.password=password
+#  security: 
+#    user: 
+#      name: 'admin'
+#      password: 'admin'
+  cloud:
+    bus:
+      trace:
+        enabled: true
+      enabled: true
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
+  zipkin:
+    base-url: http://172.16.16.56:9411/ # 指定了 Zipkin 服务器的地址
+#----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+server:
+  port: 8008
+#  context-path: /testProducer
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" 
+        #hystrix.stream,bus-refresh
+#management.endpoint.health.show-details=always #health endpoint是否必须显示全部细节。默认情况下, /actuator/health 是公开的，并且不显示细节
+  endpoint:
+    health: 
+      show-details: always
+#eureka:
+#  instance:
+#    preferIpAddress: true
+#    leaseRenewalIntervalInSeconds: 3
+#  client:
+#    registryFetchIntervalSeconds: 5
+#    healthcheck:
+#      enabled: true
+#    serviceUrl: 
+#      defaultZone: http://bkEureka56:8000/eureka/,http://bkEureka57:8000/eureka/,http://bkEureka58:8000/eureka/
+#      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
+#      defaultZone: http://127.0.0.1:8000/eureka/
+swagger2: 
+  title: 模块producer文档
+  version: 1.0
+  description: 模块producer文档描述
+  basePackage: 
+    - com.bk

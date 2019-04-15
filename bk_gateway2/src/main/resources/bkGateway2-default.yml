@@ -1,0 +1,59 @@
+spring:
+  profiles: default
+  application:
+    name: bkGateway2
+  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+#        serviceId: configserver
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+        routes:
+         - id: default_path_to_http
+          uri: https://windmt.com
+          order: 10000 #网关服务监听 10000 端口
+          predicates:
+            - Path=/**
+          filters:
+            - SetPath=/
+         - id: CompositeDiscoveryClient_CONSUMER
+    uri: lb://CONSUMER
+    order: 0
+    predicates:
+      - Path=/CONSUMER/**
+    filters:
+      - RewritePath=/CONSUMER/(?<segment>.*), /$\{segment}
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
+  zipkin:
+    base-url: http://172.16.16.56:9411/ # 指定了 Zipkin 服务器的地址
+server:
+  port: 8007
+#  context-path: /testProducer
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+eureka:
+  instance:
+    preferIpAddress: true
+#    leaseRenewalIntervalInSeconds: 3
+  client:
+#    registryFetchIntervalSeconds: 5
+#    healthcheck:
+#      enabled: true
+    serviceUrl: 
+#      defaultZone: http://bkEureka56:8000/eureka/,http://bkEureka57:8000/eureka/,http://bkEureka58:8000/eureka/
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
+#      defaultZone: http://127.0.0.1:8000/eureka/

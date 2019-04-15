@@ -9,6 +9,14 @@ spring:
       discovery:
         enabled: true
         service-id: bkConfigServer
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
+  zipkin:
+    base-url: http://172.16.16.56:9411/ # 指定了 Zipkin 服务器的地址
 #------------------err------------------------------
 #      uri: http://localhost:8005
 #      name: testProducer
@@ -20,7 +28,8 @@ eureka:
     preferIpAddress: true
   client:
     serviceUrl: 
-      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
+#      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
+      defaultZone: http://127.0.0.1:8000/eureka/
 ---
 ---
 ---

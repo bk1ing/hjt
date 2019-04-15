@@ -28,11 +28,11 @@ public class BkGatewayApplication
 		SpringApplication.run(BkGatewayApplication.class, args);
 	}
 	
-	@Bean
-    public TokenFilter tokenFilter() 
-	{
-        return new TokenFilter();
-    }
+//	@Bean
+//    public TokenFilter tokenFilter() 
+//	{
+//        return new TokenFilter();
+//    }
 	
 	/*
 	http://localhost:8006/home

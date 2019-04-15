@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: bkAdmin
+  profiles: default
+  cloud:
+    config:
+#      uri: ${CONFIG_SERVER_URL:http://localhost:8888}
+      discovery:
+#        enabled: true
+        service-id: bkConfigServer
+#      failFast: true #spring.cloud.config.failFast=true #配置文件获取失败快速返回
+#------------------err------------------------------
+#      uri: http://localhost:8005
+#      name: testProducer
+#      profile: defalut
+#      label: master
+#----------------err---------------------------------
+eureka:
+  instance:
+    preferIpAddress: true
+#    leaseRenewalIntervalInSeconds: 5
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 7
+#    lease-renewal-interval-in-seconds: 10 #表示eureka client发送心跳给server端的频率
+#    health-check-url-path: /admin/actuator/health
+#    metadata-map:
+#      user.name: ${spring.security.user.name}
+#      user.password: ${spring.security.user.password}
+  client:
+    #registryFetchIntervalSeconds: 5
+    registry-fetch-interval-seconds: 5
+    serviceUrl: 
+#      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
+      defaultZone: http://127.0.0.1:8000/eureka/
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: debug
+---
+---
+---

@@ -10,12 +10,12 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
-@Api(value="configServer模块")
+//@Api(value="configServer模块")
 @RestController
 @RequestMapping("/testHello")
 public class HelloController
 {
-	@Value("${configTestStr1:error}")
+//	@Value("${configTestStr1:error}")
 //	@Value("${info.profile:error}")
     private String configTestStr1;
 	
@@ -24,10 +24,10 @@ public class HelloController
 	http://localhost:8005/testProducer/hello
 	*/
 	@RequestMapping("/hello")
-	@ApiOperation(value="helloWorld demo",notes="这是一个测试方法")
-    @ApiImplicitParams({
-    	@ApiImplicitParam(name="msg",value="这是一个参数",required=false,paramType="query")
-    })
+//	@ApiOperation(value="helloWorld demo",notes="这是一个测试方法")
+//    @ApiImplicitParams({
+//    	@ApiImplicitParam(name="msg",value="这是一个参数",required=false,paramType="query")
+//    })
 	public String index(@RequestParam String name)
 	{
 		System.out.println( configTestStr1 );
