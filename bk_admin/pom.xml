@@ -47,7 +47,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>test_admin</finalName>
+		<finalName>bk_admin</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

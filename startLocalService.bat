@@ -1,23 +1,40 @@
 rem start java -Xmx512m -Xms64m -Xmn174m -Xss174m bk_eureka.jar
 @echo off
-set /p a= please choose ( eureka, configServer ): 
 
-if "%a%"=="bk_eureka" or "%a%"=="eureka"
-(
-	rem echo 1111111111111111111111111111
-	rem pause
+:choose_work
+set /p a= please choose ( exit, eureka, configServer, bkAdmin, ): 
+
+rem if "%a%"=="quit" or "%a%"=="0" goto finish_exit
+if "%a%"=="quit" goto finish_exit
+
+if "%a%"=="eureka" goto start_eureka
+
+if "%a%"=="configServer"  goto start_configServer
+
+if "%a%"=="bkAdmin"  goto start_bkAdmin
+
+
+:start_eureka
 	start call java -jar -Xmx256m -Xms64m bk_eureka.jar
-	pause
-)
-else
-(
-    if "%a%"=="bk_configServer" or "%a%"=="configServer"
-	(
-		rem echo 222222222222222222222222
-		rem pause
-		start call java -jar -Xmx256m -Xms64m bk_configServer.jar
-		pause
-	)
-)
+	goto choose_work
+rem pause
+rem exit
+
+:start_configServer
+	start call java -jar -Xmx256m -Xms64m bk_configServer.jar
+	goto choose_work
+rem pause
+rem exit
+
+:start_bkAdmin
+	start call java -jar -Xmx256m -Xms64m bk_admin.jar
+	goto choose_work
+rem pause
+rem exit
+
+:finish_exit
+rem pause
+
+
 rem exit
 rem start java -jar -Xmx256m -Xms64m bk_eureka.jar

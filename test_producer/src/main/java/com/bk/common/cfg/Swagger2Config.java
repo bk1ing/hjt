@@ -22,92 +22,112 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 @ConfigurationProperties(prefix = "swagger2")
-public class Swagger2Config {
-	
-    /**
-     * 获取API标题
-     */
-    public String title;
-    public String version;
-    public String description;
-    public List<String> basePackage;
+public class Swagger2Config
+{
 
-    @Bean
-    public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-        	.genericModelSubstitutes(DeferredResult.class).apiInfo(buildApiInf()).select()
-            .apis(Swagger2Config.basePackage(basePackage)).paths(PathSelectors.any()).build();
-    }
-    
-    private ApiInfo buildApiInf() {
-        return new ApiInfoBuilder().title(title).description(description).version(version).build();
-    }
+	/**
+	 * 获取API标题
+	 */
+	public String title;
+	public String version;
+	public String description;
+	public List<String> basePackage;
 
-    public static Predicate<RequestHandler> basePackage(final List<String> basePackage) {
-        return new Predicate<RequestHandler>() {
+	@Bean
+	public Docket createRestApi()
+	{
+		return new Docket(DocumentationType.SWAGGER_2).genericModelSubstitutes(DeferredResult.class)
+				.apiInfo(buildApiInf()).select().apis(Swagger2Config.basePackage(basePackage))
+				.paths(PathSelectors.any()).build();
+	}
 
-            @Override
-            public boolean apply(RequestHandler input) {
-                return declaringClass(input).transform(handlerPackage(basePackage)).or(true);
-            }
-        };
-    }
+	private ApiInfo buildApiInf()
+	{
+		return new ApiInfoBuilder().title(title).description(description).version(version).build();
+	}
 
-    /**
-     * 处理包路径配置规则,支持多路径扫描匹配
-     * 
-     * @param basePackage 扫描包路径
-     * @return Function
-     */
-    private static Function<Class<?>, Boolean> handlerPackage(final List<String> basePackage) {
-        return new Function<Class<?>, Boolean>() {
+	public static Predicate<RequestHandler> basePackage(final List<String> basePackage)
+	{
+		return new Predicate<RequestHandler>()
+		{
 
-            @Override
-            public Boolean apply(Class<?> input) {
-                for (String strPackage : basePackage) {
-                    boolean isMatch = input.getPackage().getName().startsWith(strPackage);
-                    if (isMatch) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        };
-    }
+			@Override
+			public boolean apply(RequestHandler input)
+			{
+				return declaringClass(input).transform(handlerPackage(basePackage)).or(true);
+			}
+		};
+	}
 
-    private static Optional<? extends Class<?>> declaringClass(RequestHandler input) {
-        return Optional.fromNullable(input.declaringClass());
-    }
+	/**
+	 * 处理包路径配置规则,支持多路径扫描匹配
+	 * 
+	 * @param basePackage 扫描包路径
+	 * @return Function
+	 */
+	private static Function<Class<?>, Boolean> handlerPackage(final List<String> basePackage)
+	{
+		return new Function<Class<?>, Boolean>()
+		{
 
-    public String getTitle() {
-        return title;
-    }
+			@Override
+			public Boolean apply(Class<?> input)
+			{
+				for (String strPackage : basePackage)
+				{
+					boolean isMatch = input.getPackage().getName().startsWith(strPackage);
+					if (isMatch)
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+		};
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	private static Optional<? extends Class<?>> declaringClass(RequestHandler input)
+	{
+		return Optional.fromNullable(input.declaringClass());
+	}
 
-    public String getVersion() {
-        return version;
-    }
+	public String getTitle()
+	{
+		return title;
+	}
 
-    public void setVersion(String version) {
-        this.version = version;
-    }
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getVersion()
+	{
+		return version;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setVersion(String version)
+	{
+		this.version = version;
+	}
 
-    public List<String> getBasePackage() {
-        return basePackage;
-    }
+	public String getDescription()
+	{
+		return description;
+	}
 
-    public void setBasePackage(List<String> basePackage) {
-        this.basePackage = basePackage;
-    }
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
+
+	public List<String> getBasePackage()
+	{
+		return basePackage;
+	}
+
+	public void setBasePackage(List<String> basePackage)
+	{
+		this.basePackage = basePackage;
+	}
 }

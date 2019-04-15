@@ -1,7 +1,13 @@
+server:
+  port: 8001
 spring:
   profiles: default
   application:
     name: testProducer
+  #jackson时间格式化
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
   cloud:
     bus:
       trace:
@@ -21,46 +27,73 @@ spring:
         url: http://localhost:8008
 #----------------------------------------------------------------------------
   redis:
-    # Redis数据库索引（默认为0）
-    database: 10
-    # Redis服务器地址
-    host: 172.16.16.171
-    # Redis服务器连接端口
-    port: 6379
-    # Redis服务器连接密码（默认为空）
-    password:
+    database: 10 # Redis数据库索引（默认为0）
+    host: 172.16.16.171 # Redis服务器地址
+    port: 6379     # Redis服务器连接端口
+    #password:  # Redis服务器连接密码（默认为空）
     lettuce:
       pool:
-        # 连接池最大连接数（使用负值表示没有限制）
-        max-active: 200
-        # 连接池中的最大空闲连接
-        max-idle: 20
-        # 连接池中的最小空闲连接
-        min-idle: 10
-        # 连接池最大阻塞等待时间（使用负值表示没有限制）
-        max-wait: -1ms
+        max-active: 200  # 连接池最大连接数（使用负值表示没有限制）
+        max-idle: 20 # 连接池中的最大空闲连接
+        min-idle: 10  # 连接池中的最小空闲连接
+        max-wait: -1ms # 连接池最大阻塞等待时间（使用负值表示没有限制）
     timeout: 2000ms # 连接超时时间（毫秒）默认是2000ms
-# Redis数据库索引（默认为0）
-#spring.redis.database=1
-# Redis服务器地址
-#spring.redis.host=127.0.0.1
-# Redis服务器连接端口
-#spring.redis.port=6379
-# Redis服务器连接密码（默认为空）
-#spring.redis.password=
-# 连接池最大连接数（使用负值表示没有限制）
-#spring.redis.pool.max-active=1000
-# 连接池最大阻塞等待时间（使用负值表示没有限制）
-#spring.redis.pool.max-wait=-1
-# 连接池中的最大空闲连接
-#spring.redis.pool.max-idle=10
-# 连接池中的最小空闲连接
-#spring.redis.pool.min-idle=2
-# 连接超时时间（毫秒）
-#spring.redis.timeout=0
+#spring.redis.database=1 # Redis数据库索引（默认为0）
+#spring.redis.host=127.0.0.1 # Redis服务器地址
+#spring.redis.port=6379  # Redis服务器连接端口
+#spring.redis.password=  # Redis服务器连接密码（默认为空）
+#spring.redis.pool.max-active=1000  # 连接池最大连接数（使用负值表示没有限制）
+#spring.redis.pool.max-wait=-1  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+#spring.redis.pool.max-idle=10  # 连接池中的最大空闲连接
+#spring.redis.pool.min-idle=2  # 连接池中的最小空闲连接
+#spring.redis.timeout=0  # 连接超时时间（毫秒）
+#========cluster========================
+    cluster:
+      nodes: 
+        - 172.16.16.133:6379
+        - 172.16.16.133:6380
+        - 172.16.16.133:6381
+        - 172.16.16.133:6382
+        - 172.16.16.133:6383
+        - 172.16.16.133:6384
+    #timeout: 6000ms
+    #password: 123456
+    #database: 0
 #-----------------------------------------------------------------------------
-server:
-  port: 8001
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://172.16.16.90:3306/bkTi1?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password: 123
+    driver-class-name: com.mysql.jdbc.Driver
+    platform: mysql
+         # 下面为连接池的补充设置，应用到上面所有数据源中 # 初始化大小，最小，最大
+    initialSize: 1
+    minIdle: 3
+    maxActive: 20
+    maxWait: 60000 # 配置获取连接等待超时的时间
+    timeBetweenEvictionRunsMillis: 60000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    minEvictableIdleTimeMillis: 30000 # 配置一个连接在池中最小生存的时间，单位是毫秒
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+        # 打开PSCache，并且指定每个连接上PSCache的大小
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,slf4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    #useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none # create/create-drop/update/validate
+#-----------------------------------------------------------------------------
 #  context-path: /testProducer
 feign:
   hystrix:

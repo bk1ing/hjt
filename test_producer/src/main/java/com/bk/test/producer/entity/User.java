@@ -2,11 +2,18 @@ package com.bk.test.producer.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import io.swagger.annotations.ApiModelProperty;
 
+@Entity
+@Table(name="user") //指定数据库表名
 public class User implements Serializable
 {
 	@ApiModelProperty("用户标识id")
+	@Id
 	private String id;
 
 	@ApiModelProperty("用户姓名")

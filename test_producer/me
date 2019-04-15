@@ -8,3 +8,8 @@ http://localhost:8001/hello?name=abcName
 
 
 http://localhost:8001/home
+
+
+http://localhost:8001/druid/index.html  admin/admin
+
+http://localhost:8001/getUser?name=user1
