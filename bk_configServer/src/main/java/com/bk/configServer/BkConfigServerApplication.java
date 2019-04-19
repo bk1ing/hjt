@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 
 //@ComponentScan({"com.bk.common","com.bk.configServer"})
-@ComponentScan({"com.bk"})
+//@ComponentScan({"com.bk"})
 public class BkConfigServerApplication
 {
 	protected static final Logger logger = LoggerFactory.getLogger( BkConfigServerApplication.class );

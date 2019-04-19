@@ -7,8 +7,15 @@ spring:
 #      uri: ${CONFIG_SERVER_URL:http://localhost:8888}
 #      uri: ${CONFIG_SERVER_URL:http://localhost:8005}
       discovery:
-#        enabled: true
+        enabled: true
         service-id: bkConfigServer
+    bus:
+      refresh:
+        enabled: true
+  kafka:
+    bootstrap-servers:
+    #- localhost:9092
+      - 172.16.16.90:9092
 #------------------err------------------------------
 #      uri: http://localhost:8005
 #      name: testProducer

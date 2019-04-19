@@ -20,7 +20,7 @@ http://localhost:8005/testHello/hello?name=abcName
 http://localhost:8005/swagger-ui.html
 
 
-curl -X POST http://localhost:8002/bus/refresh
+curl -X POST http://localhost:8002/actuator/bus-refresh
 
 仓库中的配置文件会被转换成 Web 接口，访问可以参照以下的规则：
 /{application}/{profile}[/{label}]

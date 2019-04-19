@@ -21,6 +21,14 @@ spring:
   profiles: default
   application:
     name: bkConfigServer
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://172.16.16.56:9411
   cloud:
 #    config:
 #      discovery:
@@ -39,23 +47,16 @@ spring:
       enabled: true
       trace:
         enabled: true
-    stream:
-#      bindings:
-        #配置自己定义的通道与哪个中间件交互
-#        shop_input: #ShopChannel里Input和Output的值
-#          destination: springConfigServerShopInput #目标主题
-#        shop_output:
-#          destination: springConfigServerShopOutput
-#      default-binder: kafka #默认的binder是kafka
-      kafka:
-        binder:
-          # Kafka的服务端列表，默认localhost
-          brokers: 172.16.16.90:9092
-          # Kafka服务端连接的ZooKeeper节点列表，默认localhost
-          zkNodes: 172.16.16.90:2181
-          minPartitionCount: 1
-          autoCreateTopics: true
-          autoAddPartitions: true
+      refresh:
+        enabled: true
+  kafka:
+    bootstrap-servers: 172.16.16.90:9092
+    consumer:
+      group-id: test
+#spring.kafka.bootstrap-servers=localhost:9092
+#spring.kafka.consumer.group-id=test
+#spring.cloud.bus.refresh.enabled=true
+
 server:
   port: 8005
 #  context-path: /testProducer
@@ -74,7 +75,8 @@ management: #监控短点配置
     web:
       exposure:
 #        include: bus-refresh,hystrix.stream
-        include: "*" #暴露所有端点 默认是info,health
+        include: "*"
+        #暴露所有端点 默认是info,health
 #management.endpoints.web.exposure.include=*
 eureka:
   instance:
