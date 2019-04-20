@@ -1,0 +1,67 @@
+--------------------------------------------------------------------
+1, bkZipkin, bkAdmin
+2, bkEureka
+3, bkConfigServer
+4, bkApiGateway
+
+
+--------------------------------------------------------------------
+
+nohup java -jar zipkin.jar  > zipkin.log &
+
+http://172.16.16.56:9411/
+
+-----------------------
+nohup java -jar bkEureka.jar --spring.profiles.active=bkEureka56  > bkEureka.log &
+nohup java -jar bkEureka.jar --spring.profiles.active=bkEureka57  > bkEureka.log &
+nohup java -jar bkEureka.jar --spring.profiles.active=bkEureka58  > bkEureka.log &
+nohup java -jar bkEureka.jar > bkEureka.log &
+
+http://172.16.16.56:8000/home
+http://172.16.16.56:8000/actuator/health
+
+
+-----------------------
+http://172.16.16.56:8005/commonConfig-default.yml
+nohup java -jar bkConfigServer.jar  > bkConfigServer.log &
+
+-----------------------
+nohup java -jar bkAdmin.jar  > bkAdmin.log &
+http://172.16.16.58:8008/
+
+-----------------------
+
+nohup java -jar bkZull.jar  > bkZull.log &
+http://192.168.159.1:8006/actuator/health
+
+
+route->service testproducer
+http://localhost:8006/testproducer/home
+http://localhost:8006/testproducer/hello?name=abcName
+http://localhost:8006/testproducer/swagger-ui.html
+
+http://localhost:8006/bkconfigserver/commonConfig-default.yml  ==> http://172.16.16.56:8005/commonConfig-default.yml
+
+route->service bkEureka
+http://localhost:8006/bkeureka/bkEurekaHome
+http://localhost:8006/bkeureka/home
+http://localhost:8006/bkadmin/home
+can't call == http://localhost:8006/bkadmin/#/applications ==>  http://172.16.16.58:8008/#/applications
+
+-----------------------
+nohup java -jar bkApiGateway.jar  > bkApiGateway.log &
+http://localhost:8007/actuator/health
+
+http://localhost:8007/BKADMIN/home
+http://localhost:8007/BKEUREKA/bkEurekaHome
+http://localhost:8007/BKCONFIGSERVER/commonConfig-default.yml  ==> http://172.16.16.56:8005/commonConfig-default.yml
+http://localhost:8007/baidu
+
+http://localhost:8007/testlb2bkConfigServer/commonConfig-default.yml
+
+--------------------------------------------------------------------
+
+
+
+
+--------------------------------------------------------------------

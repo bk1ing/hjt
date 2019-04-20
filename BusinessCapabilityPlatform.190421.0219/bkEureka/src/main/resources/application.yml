@@ -1,0 +1,132 @@
+spring: 
+  application:
+    name: bkEureka
+  profiles: default
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://172.16.16.56:9411/
+  boot:
+    admin:
+      client:
+        url: http://172.16.16.58:8008
+server:
+  port: 8000
+management: 
+  endpoints: 
+    web:
+      exposure:
+        include: "*"
+  endpoint: 
+    health: 
+      show-details: always
+eureka:
+  instance:
+    prefer-ip-address: true
+  client: 
+    serviceUrl: 
+      #defaultZone:  http://127.0.0.1:${server.port}/eureka/
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/  
+---
+spring: 
+  application:
+    name: bkEureka
+  profiles: bkEureka56
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://172.16.16.56:9411/
+  boot:
+    admin:
+      client:
+        url: http://172.16.16.58:8008
+server:
+  port: 8000
+management: 
+  endpoints: 
+    web:
+      exposure:
+        include: "*"
+  endpoint: 
+    health: 
+      show-details: always
+eureka:
+  instance: 
+    preferIpAddress: true
+  client: 
+    serviceUrl: 
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
+---
+spring: 
+  application:
+    name: bkEureka
+  profiles: bkEureka57
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://172.16.16.56:9411/
+  boot:
+    admin:
+      client:
+        url: http://172.16.16.58:8008
+server:
+  port: 8000
+management: 
+  endpoints: 
+    web:
+      exposure:
+        include: "*"
+  endpoint: 
+    health: 
+      show-details: always
+eureka:
+  instance: 
+    preferIpAddress: true
+  client: 
+    serviceUrl: 
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
+---
+spring: 
+  application:
+    name: bkEureka
+  profiles: bkEureka58
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://172.16.16.56:9411/
+  boot:
+    admin:
+      client:
+        url: http://172.16.16.58:8008
+server:
+  port: 8000
+management: 
+  endpoints: 
+    web:
+      exposure:
+        include: "*"
+  endpoint: 
+    health: 
+      show-details: always
+eureka:
+  instance: 
+    preferIpAddress: true
+  client: 
+    serviceUrl: 
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
