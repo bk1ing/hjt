@@ -43,16 +43,5 @@ rem exit
 rem start java -jar -Xmx256m -Xms64m bk_eureka.jar
 
 rem ============================================================================================
-rem nohup java -jar zipkin.jar  > zipkin.log &
-
-rem nohup java -jar bkEureka.jar --spring.profiles.active=bkEureka56  > bkEureka.log &
-rem nohup java -jar bkEureka.jar --spring.profiles.active=bkEureka57  > bkEureka.log &
-rem nohup java -jar bkEureka.jar --spring.profiles.active=bkEureka58  > bkEureka.log &
-
-rem http://localhost:8005/commonConfig-default.yml
-rem nohup java -jar bkConfigServer.jar  > bkConfigServer.log &
-
-rem nohup java -jar bkAdmin.jar  > bkAdmin.log &
-rem http://172.16.16.58:8008/
 
 rem ============================================================================================

@@ -37,16 +37,16 @@
 	        <groupId>org.springframework.cloud</groupId>
 	        <artifactId>spring-cloud-starter-sleuth</artifactId>
 	    </dependency>
-		<!-- 2.11.1 -->
+		<!-- 2.11.1 
         <dependency>
             <groupId>io.zipkin.java</groupId>
             <artifactId>zipkin-server</artifactId>
-        </dependency>
-        <!-- 2.11.1 -->
+        </dependency>-->
+        <!-- 2.11.1 x
         <dependency>
             <groupId>io.zipkin.java</groupId>
             <artifactId>zipkin-autoconfigure-ui</artifactId>
-        </dependency>
+        </dependency>-->
        <!-- zipkin2.x 需要此包连接操作mysql -->
        <!-- 3.11.4 -->
         <dependency>
@@ -59,12 +59,12 @@
             <artifactId>zipkin-autoconfigure-storage-mysql</artifactId>
             <version>2.11.1</version>
         </dependency>
-        <!--内含druid数据源连接-->
+        <!--内含druid数据源连接
         <dependency>
             <groupId>com.yuan.utils</groupId>
             <artifactId>datasource-utils</artifactId>
             <version>1.0.0</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
