@@ -1,0 +1,92 @@
+server:
+  port: 8999
+spring:
+  profiles: default
+  application:
+    name: demoService
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://172.16.16.56:9411/
+  boot:
+    admin:
+      client:
+        url: http://172.16.16.58:8008
+#-------------------------------------------------------
+  redis:
+    database: 10
+    host: 172.16.16.171
+    port: 6379
+    #password: 
+    lettuce:
+      pool:
+        max-active: 200
+        max-idle: 20
+        min-idle: 10
+        max-wait: -1ms
+    timeout: 2000ms
+    cluster:
+      nodes: 
+        - 172.16.16.133:6379
+        - 172.16.16.133:6380
+        - 172.16.16.133:6381
+        - 172.16.16.133:6382
+        - 172.16.16.133:6383
+        - 172.16.16.133:6384
+#-----------------------------------------------------------------------------
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://172.16.16.90:3306/bkTi1?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password: 123
+    driver-class-name: com.mysql.jdbc.Driver
+    platform: mysql
+    initialSize: 1
+    minIdle: 3
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,slf4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none # create/create-drop/update/validate
+#-----------------------------------------------------------------------------
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" 
+  endpoint:
+    health:
+      show-details: ALWAYS
+#-----------------------------------------------------------------------------
+swagger2: 
+  title: 模块demoConsumer文档
+  version: 1.0
+  description: 模块demoConsumer文档描述
+  basePackage: 
+    - com.funo.footstone
+#-----------------------------------------------------------------------------
+tt: default017
+configTestStr1: default019
+info:
+    profile: default007

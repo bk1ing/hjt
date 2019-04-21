@@ -1,0 +1,68 @@
+spring:
+  profiles: default
+  application:
+    name: bkConfigServer
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  boot:
+    admin:
+      client:
+        url: http://172.16.16.58:8008
+  zipkin:
+    base-url: http://172.16.16.56:9411
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://springcloundcfg@172.16.16.90:8000/r/footstone.git
+          search-paths: /BusinessCapabilityPlatform/commonConfig
+          username: springcloundcfg
+          password: springcloundcfg
+    bus:
+      enabled: true
+      trace:
+        enabled: true
+      refresh:
+        enabled: true
+  kafka:
+    bootstrap-servers: 172.16.16.90:9092
+    consumer:
+      group-id: test
+server:
+  port: 8005
+feign:
+  hystrix:
+    enabled: true
+management: 
+  endpoints: 
+    web:
+      exposure:
+        include: "*"
+  endpoint: 
+    health: 
+      show-details: always
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl: 
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
+#      defaultZone: http://127.0.0.1:8000/eureka/
+---
+spring: 
+  application:
+    name: bkConfigServer
+  profiles: dev
+server:
+  port: 8005
+---
+spring: 
+  application:
+    name: bkConfigServer
+  profiles: prod
+server:
+  port: 8005

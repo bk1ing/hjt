@@ -1,0 +1,51 @@
+server:
+  port: 8007
+spring:
+  profiles: default
+  application:
+    name: bkApiGateway
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://172.16.16.56:9411/
+  boot:
+    admin:
+      client:
+        url: http://172.16.16.58:8008
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      locator:
+        lowerCaseServiceId: true
+#如果需要小写serviceId,则配置spring.cloud.gateway.locator.lowerCaseServiceId:true
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" 
+  endpoint:
+    health: 
+      show-details: always
+---
+server:
+  port: 8007
+spring: 
+  application:
+    name: bkApiGateway
+  profiles: dev
+---
+server:
+  port: 8007
+spring: 
+  application:
+    name: bkApiGateway
+  profiles: prod

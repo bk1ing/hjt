@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: demoConsumer
+  profiles: default
+#  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+#        service-id: bkConfigServer
+#    bus:
+#      refresh:
+#        enabled: true
+#      trace:
+#        enabled: true
+#      enabled: true
+#  kafka:
+#    bootstrap-servers:
+#      - 172.16.16.90:9092
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl: 
+      defaultZone: http://172.16.16.56:8000/eureka/,http://172.16.16.57:8000/eureka/,http://172.16.16.58:8000/eureka/
+#      defaultZone: http://127.0.0.1:8000/eureka/
+---
+---
+---
